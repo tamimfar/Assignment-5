@@ -1,6 +1,7 @@
-export default function Layout({children}: {children: React.ReactNode}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <section className="h-screen max-w-sm w-md mx-auto flex  items-center">
+        <section className="h-screen max-w-sm w-md mx-auto flex flex-col justify-center  items-center">
+
             {children}
         </section>
     );

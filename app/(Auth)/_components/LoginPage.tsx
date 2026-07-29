@@ -1,5 +1,8 @@
 "use client"
 import { Button } from "@/components/ui/button"
+import { useActionState, useEffect } from "react"
+import { Spinner } from "@/components/ui/spinner"
+import { useRouter } from 'next/navigation'
 import {
   Card,
   CardAction,
@@ -15,9 +18,22 @@ import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { useState } from "react"
 import { loginAction } from "../_actions/loginAction"
+import { toast } from "sonner"
 
 export function LoginPage() {
-    const [password,setPassword] = useState(false);
+  const [password, setPassword] = useState(false);
+  const [state, action, pending] = useActionState(loginAction, false);
+  const router = useRouter()
+  useEffect(() => {
+    if (!state) return;
+    if (state.success) {
+      toast.success(state.message);
+      // router.push("/deshboard")
+    }
+    if (state.error) {
+      toast.error(state.message);
+    }
+  }, [state])
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
@@ -30,7 +46,7 @@ export function LoginPage() {
         </CardAction>
       </CardHeader>
       <CardContent>
-        <form action={loginAction}>
+        <form action={action}>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
@@ -54,23 +70,23 @@ export function LoginPage() {
               </div>
               <Input id="password" name="password" type={password ? "text" : "password"} required />
               <div className="flex gap-2 py-2 ml-2">
-              <Checkbox checked={password} onCheckedChange={(checked) => setPassword(!!checked)} />
-              <span>{password ? "Show" : "Hide"}</span>
+                <Checkbox checked={password} onCheckedChange={(checked) => setPassword(!!checked)} />
+                <span>{password ? "Show" : "Hide"}</span>
               </div>
             </div>
           </div>
-          
-             <div className="flex flex-col gap-2">
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
-        <Button variant="outline" className="w-full">
-          Login with Google
-        </Button>
-      </div>
+
+          <div className="flex flex-col gap-2">
+            <Button type="submit" className="w-full">
+              {pending ? <Spinner /> : "Login"}
+            </Button>
+            <Button variant="outline" className="w-full">
+              Login with Google
+            </Button>
+          </div>
         </form>
       </CardContent>
-   
+
     </Card>
   )
 }
