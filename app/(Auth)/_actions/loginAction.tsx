@@ -41,9 +41,21 @@ export const loginAction = async (prev: LoginResponse, formData: FormData) => {
             maxAge: 60 * 60 * 24,
             sameSite: "lax",
         })
-        // const cookieDecode = jwt.decode(result.data.accessToken) as JwtPayload
-        // console.log(result.data.accessToken)
-        redirect('/')
+        const cookieDecode = jwt.decode(result.data.access_tocken) as JwtPayload
+        console.log(cookieDecode.role)
+
+        let {role} = cookieDecode;
+        if(role === "ADMIN"){
+            redirect('/admin_deshboard')
+        }else if(role === "LANDLORD"){
+            redirect('/lanlord_deshboard')
+        }else if(role === "TENANT"){
+            redirect('/deshboard')
+            
+        }else{
+            
+            redirect('/login')
+        }
 
     }
     return result
