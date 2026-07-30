@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Toaster } from "sonner";
+// Fallback Toaster component to avoid dependency on 'sonner'
+// Replace with the real package when it's installed.
+import { Toaster } from "@/components/ui/sonner"
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Navbar from "@/components/custome/Navbar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -39,7 +42,8 @@ export default function RootLayout({
         inter.variable,
       )}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full w-full flex flex-col">
+        <Navbar/>
         <main>{children}</main>
         <Toaster position="top-center" />
       </body>
