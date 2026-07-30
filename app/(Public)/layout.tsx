@@ -1,16 +1,17 @@
+
 import Navbar from "@/components/custome/Navbar";
 import { GetProfile } from "@/service/GetProfile";
 
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
 
+    const user = await GetProfile();
 
     return (
-        <section className=" w-full">
 
-            <div className="h-screen max-w-sm w-md mx-auto flex flex-col justify-center  items-center ">
-                {children}
-            </div>
+        <section>
+            <Navbar user={user} />
+            {children}
         </section>
     );
 }

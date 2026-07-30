@@ -3,8 +3,16 @@
 import { cookies } from "next/headers";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { redirect } from "next/navigation";
-
-export const loginAction = async (prev: unknown, formData: FormData) => {
+type LoginResponse = {
+    success: true,
+    status: 200,
+    message: string,
+    data: {
+        access_tocken: string,
+        refresh_tocken: string
+    }
+}
+export const loginAction = async (prev: LoginResponse, formData: FormData) => {
 
 
     const payload = {
@@ -19,23 +27,23 @@ export const loginAction = async (prev: unknown, formData: FormData) => {
         body: JSON.stringify(payload)
     })
     let result = await res.json()
-
+    console.log(result.data.access_tocken)
     if (result.success) {
         const cookieStore = await cookies()
-        cookieStore.set("accessToken", result.data.accessToken, {
+        cookieStore.set("access_tocken", result.data.access_tocken, {
             httpOnly: true,
             maxAge: 60 * 60 * 24,
             sameSite: "lax",
         })
 
-        cookieStore.set("refreshToken", result.data.refreshToken, {
+        cookieStore.set("refresh_tocken", result.data.refresh_tocken, {
             httpOnly: true,
             maxAge: 60 * 60 * 24,
             sameSite: "lax",
         })
         // const cookieDecode = jwt.decode(result.data.accessToken) as JwtPayload
         // console.log(result.data.accessToken)
-        redirect('/deshboard')
+        redirect('/')
 
     }
     return result
