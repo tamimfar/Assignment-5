@@ -2,23 +2,20 @@
 
 import { cookies } from "next/headers";
 
-export const GetProfile = async () => {
+export const GetProperties = async () => {
 
     const cookieStore = await cookies()
     const accessToken = cookieStore.get("access_tocken")?.value || null
-
     if (!accessToken) {
         return {
             success: false,
             message: "unauthorized"
         }
     }
-    const res = await fetch("https://assinment4-gamma.vercel.app/api/auth/me", {
+      const res = await fetch("https://assinment4-gamma.vercel.app/api/properties", {
 
         headers: {
-            "Content-Type": "application/json",
-            // "Authorization": `${accessToken}`
-            cookie: `access_tocken=${accessToken}`
+            "Content-Type": "application/json",   
         },
         cache: "force-cache",
         next: {
@@ -29,6 +26,4 @@ export const GetProfile = async () => {
     let result = await res.json()
     console.log(result)
     return result
-
-
 }

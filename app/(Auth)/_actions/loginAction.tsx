@@ -14,7 +14,6 @@ type LoginResponse = {
 }
 export const loginAction = async (prev: LoginResponse, formData: FormData) => {
 
-
     const payload = {
         email: formData.get("email"),
         password: formData.get("password")
@@ -27,7 +26,7 @@ export const loginAction = async (prev: LoginResponse, formData: FormData) => {
         body: JSON.stringify(payload)
     })
     let result = await res.json()
-    console.log(result.data.access_tocken)
+    console.log(result.data?.access_tocken)
     if (result.success) {
         const cookieStore = await cookies()
         cookieStore.set("access_tocken", result.data.access_tocken, {
@@ -41,7 +40,7 @@ export const loginAction = async (prev: LoginResponse, formData: FormData) => {
             maxAge: 60 * 60 * 24,
             sameSite: "lax",
         })
-        const cookieDecode = jwt.decode(result.data.access_tocken) as JwtPayload
+        const cookieDecode = jwt.decode(result.data?.access_tocken) as JwtPayload
         console.log(cookieDecode.role)
 
         let {role} = cookieDecode;
