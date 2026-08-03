@@ -1,6 +1,6 @@
-"use server";
 
-import { cookies } from "next/headers";
+
+
 
 export const GetProperties = async () => {
 
@@ -17,7 +17,7 @@ export const GetProperties = async () => {
         headers: {
             "Content-Type": "application/json",   
         },
-        cache: "force-cache",
+        cache: "no-store",
         next: {
             revalidate: 60 * 60 * 24,
             tags: ["profile"]
