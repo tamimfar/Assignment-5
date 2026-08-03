@@ -1,3 +1,4 @@
+"use server";
 export default async function GetPropertiesById(id: string){
      
   const result = await fetch(`https://assinment4-gamma.vercel.app/api/properties/${id}`, {
@@ -7,6 +8,6 @@ export default async function GetPropertiesById(id: string){
   });
   const property = await result.json();
 
-  console.log(property)
+  
   return property
 }
