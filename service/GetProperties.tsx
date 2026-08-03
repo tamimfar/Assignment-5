@@ -4,14 +4,14 @@ import { cookies } from "next/headers";
 
 export const GetProperties = async () => {
 
-    const cookieStore = await cookies()
-    const accessToken = cookieStore.get("access_tocken")?.value || null
-    if (!accessToken) {
-        return {
-            success: false,
-            message: "unauthorized"
-        }
-    }
+    // const cookieStore = await cookies()
+    // const accessToken = cookieStore.get("access_tocken")?.value || null
+    // if (!accessToken) {
+    //     return {
+    //         success: false,
+    //         message: "unauthorized"
+    //     }
+    // }
       const res = await fetch("https://assinment4-gamma.vercel.app/api/properties", {
 
         headers: {

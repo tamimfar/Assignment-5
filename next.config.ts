@@ -5,6 +5,18 @@ const nextConfig: NextConfig = {
   //  experimental:{
   //   turbopackFileSystemCacheForDev:true
   // }
+    images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "a0.muscache.com",
+      },
+      {
+        protocol:"https",
+        hostname:"i.pinimg.com"
+      }
+    ],
+  },
 };
 
 export default nextConfig;

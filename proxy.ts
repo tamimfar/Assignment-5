@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server'
  
 const AUTH_ROUTES = ['/register','/login']
 
-const PUBLIC_ROUTES = ['/']
+const PUBLIC_ROUTES = ['/','/properties','/properties/*']
 // This function can be marked `async` if using `await` inside
 export async function proxy(request: NextRequest) {
 //   return NextResponse.redirect(new URL('/', request.url))
@@ -40,7 +40,7 @@ if(!accessToken && !isAUTH && !isPUBLIC){
         return NextResponse.redirect(new URL('/not-found', request.url));
     }else if(pathname.startsWith("/admin_deshboard") && userRole !== "ADMIN"){
         return NextResponse.redirect(new URL('/not-found', request.url));
-    }else if(pathname.startsWith("/lanlord_deshboard") && userRole !== "LANLORD"){
+    }else if(pathname.startsWith("/lanlord_deshboard") && userRole !== "LANDLORD"){
         return NextResponse.redirect(new URL('/not-found', request.url));
     }
     return NextResponse.next()

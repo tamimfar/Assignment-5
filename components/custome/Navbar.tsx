@@ -38,7 +38,7 @@ const Navbar = ({ user }: { user: any }) => {
     <Card className="flex flex-row max-w-4xl w-full mx-auto items-center justify-between p-4 mt-3 bg-[#6957E9]">
       {/* Logo Section */}
       <div>
-        <Link href="#">
+        <Link href="/">
           <h1 className="text-xl font-bold">NextJS</h1>
         </Link>
       </div>
@@ -46,25 +46,16 @@ const Navbar = ({ user }: { user: any }) => {
       {/* Navigation Links */}
       <ul className="flex items-center gap-6 font-medium">
         <li>
-          <Link href="#" className="hover:text-primary transition-colors">
+          <Link href="/" className="hover:text-primary transition-colors">
             Home
           </Link>
         </li>
         <li>
-          <Link href="#" className="hover:text-primary transition-colors">
-            About
+          <Link href="/properties" className="hover:text-primary transition-colors">
+            Properties
           </Link>
         </li>
-        <li>
-          <Link href="#" className="hover:text-primary transition-colors">
-            Pricing
-          </Link>
-        </li>
-        <li>
-          <Link href="#" className="hover:text-primary transition-colors">
-            Blog
-          </Link>
-        </li>
+       
       </ul>
 
       {/* User Profile / Dropdown */}
